@@ -1,0 +1,11 @@
+{% extends "base.tmpl" %}
+
+{% block body %}
+
+<h2>Results for {{ obj.ProcessDescription.ows_Identifier|e }} ({{ obj.ProcessDescription.ows_Title|e }}))</h2>
+
+<pre id="result">
+{{ data|e }}
+</pre>
+
+{% endblock %}

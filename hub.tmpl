@@ -1,0 +1,31 @@
+{% extends "base.tmpl" %}
+
+{% block body %}
+
+<h2>Hub information</h2>
+
+<dl>
+<dt>Title</dt>
+<dd>{{ obj.ows_ServiceIdentification.ows_Title|e }}</dd>
+<dt>Abstract</dt>
+<dd>{{ obj.ows_ServiceIdentification.ows_Abstract|e }}</dd>
+<dt>Service Type</dt>
+<dd>{{ obj.ows_ServiceIdentification.ows_ServiceType|e }}</dd>
+<dt>Service Type Version</dt>
+<dd>{{ obj.ows_ServiceIdentification.ows_ServiceTypeVersion|e }}</dd>
+<dt>Provider Name</dt>
+<dd>{{ obj.ows_ServiceProvider.ows_ProviderName|e }}</dd>
+<dt>Contact</dt>
+<dd>{{ obj.ows_ServiceProvider.ows_ServiceContact.ows_IndividualName|e }}</dd>
+</dl>
+
+<h2>Hub proceses</h2>
+
+<dl>
+{% for process in obj.wps_ProcessOfferings.wps_Process %}
+    <dt><a href="{{ prefix }}/{{ hub|e }}/{{ obj.wps_ProcessOfferings.wps_Process[loop.index0].ows_Identifier|e }}">{{ obj.wps_ProcessOfferings.wps_Process[loop.index0].ows_Identifier|e }}</a>: {{ obj.wps_ProcessOfferings.wps_Process[loop.index0].ows_Title|e }}</dt>
+    <dd>{{ obj.wps_ProcessOfferings.wps_Process[loop.index0].ows_Abstract|e }}</dd>
+{% endfor %}
+</dl>
+
+{% endblock %}

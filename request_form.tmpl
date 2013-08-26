@@ -1,0 +1,65 @@
+{% extends "base.tmpl" %}
+
+{% block body %}
+
+<h2>Request form for {{ obj.ProcessDescription.ows_Identifier|e }} ({{ obj.ProcessDescription.ows_Title|e }})</h2>
+
+<p>
+{{ obj.ProcessDescription.ows_Abstract|e }}
+</p>
+
+<form action="{{ prefix }}/{{ hub }}/{{ request }}" method="POST">
+
+<dl>
+
+{% if not obj.ProcessDescription.DataInputs or obj.ProcessDescription.DataInputs.Input|length == 0 %}
+    <dt>No inputs.</dt>
+    <dd></dd>
+{% endif %}
+
+{% if obj.ProcessDescription.DataInputs %}
+
+    {% for input in obj.ProcessDescription.DataInputs.Input %}
+
+        <dt>{{ input.ows_Identifier|e }}: {{ input.ows_Title|e }}</dt>
+        <dd>
+
+        {% if input.LiteralData %}
+
+            {% if input.LiteralData.ows_DataType %}
+                {{ input.LiteralData.ows_DataType|e }}
+            {% endif %}
+
+            {% if input.LiteralData.ows_AnyValue == '' %}
+                any value
+            {% endif %}
+
+        {% endif %}
+
+        {% if input.LiteralData and input.LiteralData.ows_AllowedValues %}
+            <select name="{{ input.ows_Identifier|e }}">
+            {% for allowed_value in input.LiteralData.ows_AllowedValues.ows_Value %}
+                {% if input.LiteralData.DefaultValue and allowed_value == input.LiteralData.DefaultValue %}
+                    <option value="{{ allowed_value|e }}" selected="selected">{{ allowed_value|e }}</option>
+                {% else %}
+                    <option value="{{ allowed_value|e }}">{{ allowed_value|e }}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+        {% else %}
+            <input type="text" name="{{ input.ows_Identifier|e }}" />
+        {% endif %}
+
+        </dd>
+
+    {% endfor %}
+{% endif %}
+
+<dt></dt>
+<dd><input type="submit" name="dai-submit" value="Submit" /></dd>
+
+</dl>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.tmpl" %}
+
+{% block body %}
+
+<p>
+This site is a demonstration of the <a href="http://atlasing.incf.org/">INCF Digital Atlasing Infrastructure</a> (DAI) <a href="http://code.google.com/p/incf-dai/wiki/AtlasRequestInterfaceSpec">interface</a>.  This pane shows a lightweight front-end to the infrastructure, while the pane at the right shows the DAI calls that were made.
+</p>
+
+<p>
+Contact <a href="mailto:christian.haselgrove@umassmed.edu">Christian Haselgrove</a> with questions.
+</p>
+
+<p>
+To get started, choose a hub:
+<ul>
+{% for hub_id in hubs %}
+    <li><a href="{{ prefix }}/{{ hub_id|e }}">{{ hub_id|e }}</a></li>
+{% endfor %}
+</ul>
+</p>
+
+{% endblock %}

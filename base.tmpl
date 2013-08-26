@@ -1,0 +1,72 @@
+<html>
+
+<head>
+
+<title>{{ title|e }} - INCF DAI Demo</title>
+
+<link rel="stylesheet" type="text/css" href="{{ prefix }}/dai.css" />
+
+</head>
+
+<body>
+
+<h1>INCF DAI Demo</h1>
+
+<div id="breadcrumbs">
+{% for node in breadcrumbs %}
+    {% if not loop.first %}
+        ->
+    {% endif %}
+    {% if node[1] == '/' %}
+        <a href="{{ prefix }}/">{{ node[0]|e }}</a>
+    {% elif node[1] %}
+        <a href="{{ prefix }}{{ node[1] }}">{{ node[0]|e }}</a>
+    {% else %}
+        {{ node[0]|e }}
+    {% endif %}
+{% endfor %}
+</div>
+
+<div id="body">
+
+<div id="content">
+{% block body %}{% endblock %}
+</div>
+
+
+<div id="calls">
+
+<p>
+DAI Calls
+</p>
+
+{% if calls|length == 0 %}
+
+    No calls
+
+{% else %}
+
+
+    {% for call in calls %}
+    <div class="call">
+{{ call[0].ident }}
+<br/>
+{{ call[1]|e }}
+<br/>
+<a href="{{ prefix }}/{{ call[0].url|e }}" target="_blank">{{ call[0].url|e }}</a>
+<pre>{{ call[0].data|e }}</pre>
+    </div>
+    {% endfor %}
+     
+  </div>
+</div> 
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>
