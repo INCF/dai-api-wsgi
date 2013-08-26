@@ -1,5 +1,9 @@
+import sys
+import os
 import traceback
 import wsgiref.simple_server
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(base_dir)
 import handler
 
 # this is the base of this webapp; URLs will be '%s/stuff' % prefix
@@ -12,8 +16,9 @@ def handle(environ):
 
 def application(environ, start_response):
  
-    if environ['PATH_INFO'] == '%s/dai.css' % prefix:
-        data = open('dai.css').read()
+#    if environ['PATH_INFO'] == '%s/dai.css' % prefix:
+    if environ['PATH_INFO'] == '/dai.css':
+        data = open('%s/dai.css' % base_dir).read()
         response_headers = [('Content-Type', 'text/css'), 
                             ('Content-Length', str(len(data)))]
         start_response('200 OK', response_headers)

@@ -1,3 +1,4 @@
+import os
 import httplib
 import urllib
 import urlparse
@@ -74,7 +75,8 @@ class HubCall(BaseHubCall):
         return
 
 def render_template(template, render_kwargs):
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
+    template_dir = os.path.dirname(os.path.abspath(__file__))
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir))
     t = env.get_template(template)
     return t.render(**render_kwargs)
 
@@ -262,13 +264,14 @@ def handle(prefix, environ):
                 'text/plain', 
                 '', 
                 [('Location', '%s/' % prefix)])
-    elif not environ['PATH_INFO'].startswith(prefix+'/'):
-        return ('500 Internal Server Error', 
-                'text/plain', 
-                'Server error: DAI application handling non-DAI URL', 
-                [])
+#    elif not environ['PATH_INFO'].startswith(prefix+'/'):
+#        return ('500 Internal Server Error', 
+#                'text/plain', 
+#                'Server error: DAI application handling non-DAI URL', 
+#                [])
 
-    path_parts = environ['PATH_INFO'][len(prefix):].strip('/').split('/')
+#    path_parts = environ['PATH_INFO'][len(prefix):].strip('/').split('/')
+    path_parts = environ['PATH_INFO'].strip('/').split('/')
 
     assert len(path_parts) > 0
     hub = path_parts[0]
