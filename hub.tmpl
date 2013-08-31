@@ -4,6 +4,8 @@
 
 <h2>Hub information</h2>
 
+<div id="result">
+
 <dl>
 <dt>Title</dt>
 <dd>{{ obj.ows_ServiceIdentification.ows_Title|e }}</dd>
@@ -27,5 +29,7 @@
     <dd>{{ obj.wps_ProcessOfferings.wps_Process[loop.index0].ows_Abstract|e }}</dd>
 {% endfor %}
 </dl>
+
+</div>
 
 {% endblock %}
