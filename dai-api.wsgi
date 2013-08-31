@@ -9,6 +9,7 @@ import handler
 # this is the base of this webapp; URLs will be '%s/stuff' % prefix
 # so prefix shouldn't end in '/'
 prefix = '/dai-api'
+prefix = ''
 
 def handle(environ):
     reload(handler)

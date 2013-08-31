@@ -252,7 +252,7 @@ class ResultsHandler(BaseHandler):
                          'calls': self.calls, 
                          'hub': self.hub, 
                          'request': self.request, 
-                         'data': info_call.data, 
+                         'data': call.data, 
                          'obj': info_call.obj}
         self.output = render_template('request_result.tmpl', template_vars)
         return
