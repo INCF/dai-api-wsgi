@@ -5,11 +5,11 @@ import urlparse
 import jinja2
 import xml2obj
 
-hubs = {'central': 'http://incf-dev.crbs.ucsd.edu/central/atlas', 
-        'aba': 'http://incf-dev.crbs.ucsd.edu/aba/atlas', 
-        'emap': 'http://incf-dev.crbs.ucsd.edu/emap/atlas', 
-        'ucsd': 'http://incf-dev.crbs.ucsd.edu/ucsd/atlas', 
-        'whs': 'http://incf-dev.crbs.ucsd.edu/whs/atlas'}
+hubs = {'central': 'http://whs1.pdc.kth.se/central/atlas', 
+        'aba': 'http://whs1.pdc.kth.se/aba/atlas', 
+        'emap': 'http://whs1.pdc.kth.se/emap/atlas', 
+        'ucsd': 'http://whs1.pdc.kth.se/ucsd/atlas', 
+        'whs': 'http://whs1.pdc.kth.se/whs/atlas'}
 
 class BaseHubCall:
 
